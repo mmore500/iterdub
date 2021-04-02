@@ -16,7 +16,7 @@ iterdub
 
 
 
-iterdub makes generating acompact name to describe a series easy & consistent
+iterdub makes generating a compact name to describe a series easy & consistent
 
 
 * Free software: MIT license
