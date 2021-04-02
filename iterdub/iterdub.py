@@ -16,7 +16,6 @@ def _float_series_gcd( floats ):
     x = reduce( _float_gcd, floats )
     return x
 
-
 def _is_numeric( val ):
     try:
         float( val )
@@ -55,6 +54,12 @@ def dub( values ):
         return 'none'
     if values and all( _is_numeric( value ) for value in values ):
         return _summarize_ranges( float( value ) for value in values )
+    if not all(
+            len(str(value)) < 16
+            and '~' not in str(value)
+            for value in values
+        ):
+        return f'...%{len(set(values))}'
     elif len(set(values)) < 3:
         return '~'.join( str(x) for x in sorted(set(values)) )
     else:
