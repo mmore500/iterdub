@@ -40,10 +40,12 @@ def _to_ranges( floats ):
 
 
 def _summarize_ranges( floats ):
+    # maximum allowed precision, prevents scientific notation formatting
+    prec = 999999999
     return '_'.join(
-        f'{begin:g}-{end:g}{f"%{by:g}" if by != 1 else ""}'
+        f'{begin:.{prec}g}-{end:.{prec}g}{f"%{by:.{prec}g}" if by != 1 else ""}'
         if begin != end else
-        f'{begin:g}'
+        f'{begin:.{prec}g}'
         for begin, end, by in _to_ranges(floats )
     )
 

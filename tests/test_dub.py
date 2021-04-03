@@ -21,6 +21,7 @@ def test_str_dub():
 
 def test_int_dub():
     assert ib.dub([1]) == '1'
+    assert ib.dub([20433930, 20433930]) == '20433930'
     assert ib.dub([1, 2]) == '1-2'
     assert ib.dub([1, 3, 2]) == '1-3'
     assert ib.dub([0, 4, 2]) == '0-4%2'
