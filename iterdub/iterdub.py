@@ -2,6 +2,7 @@
 
 from functools import reduce
 import itertools as it
+import numpy as np
 from math import isnan
 
 # adapted from https://stackoverflow.com/a/45325587
@@ -40,12 +41,15 @@ def _to_ranges( floats ):
 
 
 def _summarize_ranges( floats ):
-    # maximum allowed precision, prevents scientific notation formatting
-    prec = 999999999
+    fmt = lambda f: np.format_float_positional(
+        f,
+        trim='-',
+        precision=6,
+    )
     return '_'.join(
-        f'{begin:.{prec}g}-{end:.{prec}g}{f"%{by:.{prec}g}" if by != 1 else ""}'
+        f'{fmt(begin)}-{fmt(end)}{f"%{fmt(by)}" if by != 1 else ""}'
         if begin != end else
-        f'{begin:.{prec}g}'
+        f'{fmt(begin)}'
         for begin, end, by in _to_ranges(floats )
     )
 
