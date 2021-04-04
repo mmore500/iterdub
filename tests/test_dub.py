@@ -13,10 +13,25 @@ def test_empty_dub():
 
 def test_str_dub():
     assert ib.dub(['foo']) == 'foo'
+    assert ib.dub(['foo~']) == 'foo~'
     assert ib.dub(['foo', 'bar', 'bar']) == 'bar~foo'
-    assert ib.dub(['foo', 'barrrrrrrrrrrrrrrrrrrrrrrrr', 'foo']) == '...%2'
+    assert ib.dub(['foo~', 'bar', 'bar']) == '...%2'
+    assert ib.dub([
+        'baaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+    ]) == 'baaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'
+    assert ib.dub([
+        'foo',
+        'baaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+        'foo',
+    ]) == '...%2'
     assert ib.dub(['foo', 'bar', 'bizz', 'foo']) == 'bar~...%2'
-    assert ib.dub(['foooooooooooooooooo', 'bar', 'bizz', 'bar']) == '...%3'
+    assert ib.dub(['foo', 'bar', 'bizz', 'foz']) == 'bar~...%3'
+    assert ib.dub([
+        'fooooooooooooooooooooooooooooooooooooooooo',
+        'bar',
+        'bizz',
+        'bar',
+    ]) == '...%3'
     assert ib.dub(['foo~', 'bar', 'bizz', 'bar']) == '...%3'
 
 def test_int_dub():
