@@ -61,7 +61,7 @@ def dub( values ):
     if values and all( _is_numeric( value ) for value in values ):
         return _summarize_ranges( float( value ) for value in values )
     if not all(
-            len(str(value)) < 16
+            len(str(value)) <= 32
             and '~' not in str(value)
             for value in values
         ):
